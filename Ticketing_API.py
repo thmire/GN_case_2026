@@ -6,10 +6,31 @@ import uvicorn # Running local server.
 from pydantic import BaseModel
 from typing import Optional # want to have optional attributes in pydantic
 from datetime import datetime
+import os, json
 
 app = FastAPI()
 tickets = {} # Store the tickets.
 next_id = 1
+
+# Load in some mock data when the app starts up.
+@app.on_event("startup")
+def load_tickets():
+    global next_id
+    path = "./mock_tickets.json"
+    if not os.path.exists(path):
+        return
+    with open(path) as f:
+        data = json.load(f)
+    for t in data:
+        tickets[next_id] = {
+            "id": next_id,
+            "title": t["title"],
+            "description": t["description"],
+            "created": datetime.fromisoformat(t["created"]),
+            "status": t["status"],
+            "resolution": t.get("resolution"),
+        }
+        next_id += 1
 
 class TicketCreate(BaseModel):
     title: str
@@ -21,9 +42,6 @@ class TicketUpdate(BaseModel):
     status: Optional[str] = None
     resolution: Optional[str] = None
     
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
 
 # Create tickets
 @app.post("/tickets")
@@ -70,11 +88,20 @@ def update_ticket(ticket_id: int, update: TicketUpdate):
     
     return tickets[ticket_id]
     
-
 # Read all tickets
 @app.get("/tickets")
 def list_all_tickets():
     return list(tickets.values())
+
+@app.get("/tickets/search")
+def get_specific_tickets(status: Optional[str] = None,
+                         title: Optional[str] = None):
+    results = list(tickets.values())
+    if status is not None:
+        results = [t for t in results if t["status"] == status]
+    if title is not None:
+        results = [t for t in results if title.lower() in t["title"].lower()]
+    return results
 
 # Get a specific ticket
 @app.get("/tickets/{ticket_id}")
@@ -85,10 +112,8 @@ def get_ticket(ticket_id: int):
                             detail=f"Ticket {ticket_id} not found")
     return tickets[ticket_id]
 
-# Get tickets with specific properties
-#@app.get("/tickets")
-#def get_specific_tickets(status)
-#    results = list(tickets.values())
+
+
 
 
 

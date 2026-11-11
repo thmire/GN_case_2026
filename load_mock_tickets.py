@@ -11,6 +11,7 @@ for t in ticket_data:
     ticket_id = r.json()["id"]
 
     # For tickets with non-default data, update to reflect status and resolution
+    # NB: the created field will be incorrect, as I don't want that editable.
     if t["status"] != "OPEN" or t["resolution"]:
         requests.patch(f"http://127.0.0.1:8000/tickets/{ticket_id}",
                        json={"status": t["status"],
