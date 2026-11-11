@@ -80,7 +80,7 @@ def update_ticket(ticket_id: int, update: TicketUpdate):
     # Check if the status update is acceptable
     if update.status not in ["OPEN","RESOLVED","CLOSED"]:
         raise HTTPException(status_code=422,
-                        detail="ticket status must be OPEN, RESOLVED or CLOSED")
+                        detail=f"Invalid status {update.status}. Ticket status must be OPEN, RESOLVED or CLOSED")
     
     # If both pass, get the update
     update_data = update.model_dump(exclude_unset=True) 
