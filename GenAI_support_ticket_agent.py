@@ -177,7 +177,8 @@ def run_agent(user_input: str):
             model=MODEL,
             messages=messages,
             tools=TOOLS,
-            max_completion_tokens=100,
+            max_completion_tokens=300, # increased token number slightly.
+            reasoning_effort="none", # Need this otherwise error. 
         )
         msg = response.choices[0].message
         if not msg.tool_calls:
@@ -199,7 +200,13 @@ def run_agent(user_input: str):
 
 # ---------
 if __name__ == "__main__":
-    print("Ticket Agent ready. Type 'exit' to quit.")
+    INTRO_STRING = (
+        "This script is an interface to a GenAI Agent designed to allow you to "
+        "create, update and delete support tickets, as well as seach for "
+        "already existing tickets on a locally run server. "
+        "Type your request when you are ready or type 'exit' to quit."
+        )
+    print(INTRO_STRING)
     while True:
         user_input = input("\nYou: ")
         if user_input.lower() in ("exit", "quit"):
