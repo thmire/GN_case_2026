@@ -59,7 +59,6 @@ On startup it loads 20 mock tickets from `mock_tickets.json`. Tickets created, u
 | POST | `/tickets` | Create a ticket |
 | PATCH | `/tickets/{id}` | Update status/resolution,  **404** if not found, **422** if status is invalid |
 | DELETE | `/tickets/{id}` | Delete a ticket **404** if not found |
-<<<<<<< HEAD
 
 ### Business logic errors (required by the brief)
 
@@ -99,15 +98,12 @@ python3 GenAI_support_ticket_agent.py
 
 ---
 
-## Part 3: PR Review Bot
+### Part 3: PR Review Bot
 
 When a PR is opened or updated on this repo, a Github Actions workflow runs "analyze_pr.py". This fetchs the PR diff, sends it to the LLM for a summary and improvement suggestions, and posts a comment on the PR.
-=======
->>>>>>> 9d80c21e66894db8a661873d9acd99a0b28022ec
 
-### Business logic errors (required by the brief)
+### Example
 
-<<<<<<< HEAD
 I made a branch, made a test commit, and continued to commit on that branch while completing Task 4 and working on the README.
 The bot made multiple comments in the PR at the URL below, before I merged the PR.
 
@@ -125,30 +121,3 @@ A minimal skeleton that describes how the API would run on Azure.
 
 ## Part 5: Design decision I would change in production
 
-=======
-```bash
-# 404
-curl -i http://127.0.0.1:8000/tickets/999
-```
-
-```bash
-# 422
-curl -i -X PATCH http://127.0.0.1:8000/tickets/1 \
-  -H "Content-Type: application/json" \
-  -d '{"status": "PROGRESS"}'
-```
-
-If you prefer, the interactive docs page can be used to check responses:
-1) Open http://127.0.0.1:8000/docs
-2) Browse to GET /tickets/{ticket_ID} and select "Try it out"
-3) Enter ticket ID = 99, and execute - returns 404
-5) Browse to PATCH /tickets/{ticket_ID} and select "Try it out"
-6) Enter "PROGRESS" as the value of status in the Edit Value Schema - returns 422 with a helpful error message.
-
-
-## Part 2: GenAI Agent
-
-```bash
-python3 GenAI_support_ticket_agent.py
-```
->>>>>>> 9d80c21e66894db8a661873d9acd99a0b28022ec
