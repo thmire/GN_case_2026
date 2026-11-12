@@ -65,7 +65,7 @@ def delete_ticket(ticket_id: int):
     # Check if ticket exists
     if ticket_id not in tickets:
         raise HTTPException(status_code=404,
-                            detail=f"Ticket {ticket_id} not found")
+                            detail=f"Ticket {ticket_id} does not exist")
     del tickets[ticket_id]
     return Response(status_code=204)
         
@@ -75,7 +75,7 @@ def update_ticket(ticket_id: int, update: TicketUpdate):
     # Check if ticket exists
     if ticket_id not in tickets:
         raise HTTPException(status_code=404,
-                            detail=f"Ticket {ticket_id} not found")
+                            detail=f"Ticket {ticket_id} does not exist")
     
     # Check if the status update is acceptable
     if update.status not in ["OPEN","RESOLVED","CLOSED"]:
@@ -109,7 +109,7 @@ def get_ticket(ticket_id: int):
     # Check if ticket exists
     if ticket_id not in tickets:
         raise HTTPException(status_code=404,
-                            detail=f"Ticket {ticket_id} not found")
+                            detail=f"Ticket {ticket_id} does not exist")
     return tickets[ticket_id]
 
 
