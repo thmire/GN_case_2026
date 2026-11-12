@@ -46,9 +46,9 @@ if len(diff) > max_chars:
 # Should be a simple summary and any suggestions for improvements.
 
 SYSTEM_PROMPT = (
-    "You are a code reviewer."
-    "Provide a simple summary of the pull request."
-    "Make suggestions for improvements if it is appropriate."
+    "You are a code reviewer. "
+    "Provide a simple summary of the pull request. "
+    "Make suggestions for improvements if it is appropriate. "
     "Be concise."
     )
 
@@ -66,5 +66,18 @@ response = client.chat.completions.create(
     reasoning_effort="none",
 )
 
+review = response.choices[0].message.content
+
+# Post a comment on the PR
+
+comment_url = f"https://api.github.com/repos/{REPO}/issues/{PR_NUMBER}/comments"
+comment_headers = {"Authorization": f"Bearer {GITHUB_TOKEN}",
+                   "Accept": "application/vnd.github+json"}
+payload = {"body": f"**Automated review**\n\n{review}"}
+response = requests.post(comment_url,
+                         headers=comment_headers,
+                         json=payload)
+response.raise_for_status() # Check that it worked
+print("Comment posted.")
 
 
