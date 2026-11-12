@@ -20,6 +20,8 @@ MODEL = "gpt-6-luna"
 # Here provide the python functions that query the API:
 API_BASE = "http://127.0.0.1:8000"
 
+# Below we describe the 7 functions that we can use to query the API:
+
 # Create a ticket
 def create_ticket(title: str, description: str):
     r = requests.post(f"{API_BASE}/tickets",
