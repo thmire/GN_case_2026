@@ -20,8 +20,8 @@ A mock ticketing API, an LLM-powered agent that operates it, a GitHub Actions PR
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/thmire/GN\_case\_2026.git
-cd GN\_case\_2026
+git clone https://github.com/thmire/GN_case_2026.git
+cd GN_case_2026
 
 # 2. Create a virtual environment (optional but recommended)
 python3 -m venv .venv
@@ -118,6 +118,8 @@ The bot made multiple comments in the PR at the URL below, before I merged the P
 
 [Example PR #1](https://github.com/thmire/GN_case_2026/pull/1)
 
+---
+
 ## Part 4: Terraform (Azure)
 
 A minimal, validated, skeleton that describes how the API would run on Azure.
@@ -135,6 +137,8 @@ cd infra
 terraform init
 terraform validate
 ```
+
+---
 
 ## Part 5: Design decisions I would change in production
 
