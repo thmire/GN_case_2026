@@ -100,6 +100,8 @@ python3 GenAI_support_ticket_agent.py
 
 ### Example session
 
+![Agent demo](assets/Agent_demo.gif)
+
 ---
 
 ### Part 3: PR Review Bot
