@@ -15,7 +15,6 @@ A mock ticketing API, an LLM-powered agent that operates it, a GitHub Actions PR
 - Python 3.10+
 - Terraform 1.0+
 - The API key provided in the brief
-- Python modules: fastapi, uvicorn, pydantic, typing, datetime, os, json 
 
 ## Setup
 
@@ -98,7 +97,11 @@ source .venv/bin/activate
 python3 GenAI_support_ticket_agent.py
 ```
 
+One can then interact with the agent from the terminal.
+
 ### Example session
+
+In the below terminal session, I test the requested scenarios from the case.
 
 ![Agent demo](assets/Agent_demo.gif)
 
@@ -113,17 +116,25 @@ When a PR is opened or updated on this repo, a Github Actions workflow runs "ana
 I made a branch, made a test commit, and continued to commit on that branch while completing Task 4 and working on the README.
 The bot made multiple comments in the PR at the URL below, before I merged the PR. See URL below.
 
-https://github.com/thmire/GN_case_2026/pull/1
+[Example PR #1](https://github.com/thmire/GN_case_2026/pull/1)
 
 ## Part 4: Terraform (Azure)
 
-A minimal skeleton that describes how the API would run on Azure.
+A minimal, validated, skeleton that describes how the API would run on Azure.
 
 ### Files
 
 - `infra/main.tf` — resource group, App Service plan, Linux Web App
 - `infra/variables.tf` — three input variables
 - `infra/outputs.tf` — the app's default hostname
+
+### Validation steps
+
+```bash
+cd infra
+terraform init
+terraform validate
+```
 
 ## Part 5: Design decision I would change in production
 
