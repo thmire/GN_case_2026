@@ -17,7 +17,7 @@ A mock ticketing API, an LLM-powered agent that operates it, a GitHub Actions PR
 - The API key provided in the brief
 - Python modules: fastapi, uvicorn, pydantic, typing, datetime, os, json 
 
-## Setup (do this once)
+## Setup
 
 ```bash
 # 1. Clone the repo
@@ -105,7 +105,7 @@ When a PR is opened or updated on this repo, a Github Actions workflow runs "ana
 ### Example
 
 I made a branch, made a test commit, and continued to commit on that branch while completing Task 4 and working on the README.
-The bot made multiple comments in the PR at the URL below, before I merged the PR.
+The bot made multiple comments in the PR at the URL below, before I merged the PR. See URL below.
 
 https://github.com/thmire/GN_case_2026/pull/1
 
