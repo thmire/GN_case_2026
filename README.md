@@ -21,11 +21,11 @@ A mock ticketing API, an LLM-powered agent that operates it, a GitHub Actions PR
 
 ```bash
 # 1. Clone the repo
-git clone <repo-url>
-cd <repo-name>
+git clone https://github.com/thmire/GN\_case\_2026.git
+cd GN\_case\_2026
 
 # 2. Create a virtual environment (optional but recommended)
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 
 # 3. Install dependencies
@@ -45,9 +45,10 @@ The `.env` file is gitignored.
 uvicorn Ticketing_API:app --reload
 ```
 
-The API is available at `http://127.0.0.1:8000`. Docs at `http://127.0.0.1:8000/docs`.
+The API is available at http://127.0.0.1:8000. Docs at http://127.0.0.1:8000/docs.
 
-On startup it loads 20 mock tickets from `mock_tickets.json`. Tickets created, updated, or deleted during a session are lost when the server restarts.
+On startup it loads 20 mock tickets from `mock_tickets.json`, which can be read at at http://127.0.0.1:8000/tickets.
+Tickets created, updated, or deleted during a session are lost when the server restarts.
 
 ### Endpoints
 
@@ -61,6 +62,8 @@ On startup it loads 20 mock tickets from `mock_tickets.json`. Tickets created, u
 | DELETE | `/tickets/{id}` | Delete a ticket **404** if not found |
 
 ### Business logic errors (required by the brief)
+
+To test the business logic errors, run the below in another terminal.
 
 ```bash
 # 404
@@ -77,9 +80,9 @@ curl -i -X PATCH http://127.0.0.1:8000/tickets/1 \
 If you prefer, the interactive docs page can be used to check responses:
 1) Open http://127.0.0.1:8000/docs
 2) Browse to GET /tickets/{ticket_ID} and select "Try it out"
-3) Enter ticket ID = 99, and execute - returns 404
+3) Enter ticket ID = 999, and execute - returns 404
 5) Browse to PATCH /tickets/{ticket_ID} and select "Try it out"
-6) Enter "PROGRESS" as the value of status in the Edit Value Schema - returns 422 with a helpful error message.
+6) Enter ticket ID = 1 and "PROGRESS" as the value of status in the Edit Value Schema - returns 422 with a helpful error message.
 
 
 ## Part 2: GenAI Agent
@@ -88,9 +91,10 @@ A CLI agent that operates the ticketing API.
 
 ### Run
 
-With the API running, in a seperate terminal:
+With the API running, navigate to the GN\_case\_2026 folder in a seperate terminal and activate the venv, followed by the agent:
 
 ```bash
+source .venv/bin/activate
 python3 GenAI_support_ticket_agent.py
 ```
 
