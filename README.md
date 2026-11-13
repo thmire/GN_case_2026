@@ -107,7 +107,7 @@ In the below terminal session, I test the requested scenarios from the case.
 
 ---
 
-### Part 3: PR Review Bot
+## Part 3: PR Review Bot
 
 When a PR is opened or updated on this repo, a Github Actions workflow runs "analyze_pr.py". This fetchs the PR diff, sends it to the LLM for a summary and improvement suggestions, and posts a comment on the PR.
 
@@ -136,5 +136,7 @@ terraform init
 terraform validate
 ```
 
-## Part 5: Design decision I would change in production
+## Part 5: Design decisions I would change in production
+
+In memory storage: The mock API is storing the tickets in a Python dictionary in memory, so all data is lost on restart. This is a simplification for the take-home task, but in production this should be replaced with a persistent database. Alongside that, we can add authentication and role-based authorisation, so ticket interactions can be restricted to certain roles and attributable. A further improvement could be a "soft delete" which allows accidentally deleted tickets to be recovered.
 
